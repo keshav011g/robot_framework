@@ -29,7 +29,6 @@ class LIS3DHCore
 {
 public:
 	LIS3DHCore( uint8_t );
-	LIS3DHCore( uint8_t, uint8_t );
 	~LIS3DHCore() = default;
 	
 	status_t beginCore( void );
@@ -43,18 +42,14 @@ public:
 	//readRegister reads one 8-bit register
 	status_t readRegister(uint8_t*, uint8_t);
 	
-	//Reads two 8-bit regs, LSByte then MSByte order, and concatenates them.
-	//  Acts as a 16-bit read operation
-	status_t readRegisterInt16(int16_t*, uint8_t offset );
-	
 	//Writes an 8-bit byte;
 	status_t writeRegister(uint8_t, uint8_t);
 	
 private:
 	//Communication stuff
-	uint8_t commInterface;
 	uint8_t I2CAddress;
 	uint8_t chipSelectPin;
+	uint8_t i2c_fd;
 };
 
 //This struct holds the settings the driver uses to do calculations
@@ -90,7 +85,7 @@ class LIS3DH : public LIS3DHCore
 {
 public:
 	//IMU settings
-	SensorSettings settings;
+	
 	
 	//Error checking
 	uint16_t allOnesCounter;
@@ -130,7 +125,7 @@ public:
 	float calcAccel( int16_t );
 	
 private:
-
+SensorSettings settings;
 };
 
 //Device Registers
