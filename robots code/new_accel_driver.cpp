@@ -90,8 +90,6 @@ status_t LIS3DH::begin(void)
     return returnError;
 }
 
-// Remaining LIS3DH class methods remain unchanged from original
-// (readRawAccelX/Y/Z, calcAccel, FIFO methods, etc.)
 void LIS3DH::applySettings( void )
 {
 	uint8_t dataToWrite = 0;  //Temporary variable
