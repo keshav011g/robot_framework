@@ -5,9 +5,6 @@
 #include <unistd.h>
 #include <cstdint>
 
-//****************************************************************************//
-//  LIS3DHCore (Modified for Raspberry Pi I2C)
-//****************************************************************************//
 LIS3DHCore::LIS3DHCore(uint8_t i2cAddress) : I2CAddress(i2cAddress)
 {
     i2c_fd = -1;
@@ -57,6 +54,7 @@ status_t LIS3DHCore::readRegister(uint8_t *outputPointer, uint8_t offset)
     ssize_t bytesRead = read(i2c_fd, outputPointer, 1);
     return (bytesRead == 1) ? IMU_SUCCESS : IMU_HW_ERROR;
 }
+
 
 status_t LIS3DHCore::writeRegister(uint8_t offset, uint8_t dataToWrite)
 {
